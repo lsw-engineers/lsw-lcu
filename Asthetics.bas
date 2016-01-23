@@ -10,10 +10,17 @@ Public Sub SetCktDivisions()
     Dim CurrentCkt As Excel.Range
     Dim NoPoles As String
     Dim SchdPoles As Byte
+    Dim MaxCircuits As Byte
     
     SchdPoles = GetPoles()
-
-    For CurrentCktNo = 1 To 41 Step 2 'Cycle Thru Odds
+    
+    If Range("I95").Value = "84" Then
+        MaxCircuits = 84
+        Else
+        MaxCircuits = 42
+    End If
+     
+    For CurrentCktNo = 1 To (MaxCircuits - 1) Step 2 'Cycle Thru Odds
     
         Set CurrentCkt = Range("CKT_" & CurrentCktNo & "_Poles")
         
@@ -74,7 +81,7 @@ Public Sub SetCktDivisions()
     
     Next
     
-    For CurrentCktNo = 2 To 42 Step 2 'Cycle Thru Evens
+    For CurrentCktNo = 2 To MaxCircuits Step 2 'Cycle Thru Evens
         
         Set CurrentCkt = Range("CKT_" & CurrentCktNo & "_Poles")
         

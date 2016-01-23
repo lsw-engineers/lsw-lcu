@@ -11,7 +11,7 @@ Public Sub LinkSchedule(FileToLink As String, ConnectionType As String, _
                         NoPoles As Byte, FirstCktNo As Byte)
     
     'Acceptable ConnectionType is "CKT" "Misc1" "Misc2" "Load1" "Load2" etc.
-    'FirstCktNo will be an integer 1 to 42
+    'FirstCktNo will be an integer 1 to 84
     'NoPoles will be an integer 1 to 3
     
     ScreenUpdates (False)
