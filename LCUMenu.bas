@@ -128,6 +128,13 @@ Sub CreateLCUMenu()
         .Caption = "&Reset All Loads"
         .OnAction = "ResetPanelLoads"
     End With
+
+    Set MenuItem = LCUMenu.Controls.Add _
+        (Type:=msoControlButton)
+    With MenuItem
+        .Caption = "Re-apply Cell Names:"
+        .OnAction = "ApplyCellNames"
+    End With
     
     Set MenuItem = LCUMenu.Controls.Add _
         (Type:=msoControlButton)

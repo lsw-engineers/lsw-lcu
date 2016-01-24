@@ -28,7 +28,15 @@ Public Sub FixLTFormulas()
     
         Case "PANEL"
         
-            For CurrentCkt = 1 To 42
+            Dim MaxCircuits As Byte
+            
+            If Range("I95").Value = "84" Then
+                MaxCircuits = 84
+                Else
+                MaxCircuits = 42
+            End If
+        
+            For CurrentCkt = 1 To MaxCircuits
             
                 TestFormula = Range("CKT_" & CurrentCkt & "_VA").Formula
                 
@@ -98,8 +106,16 @@ Public Sub ResetPanelLoads()
     Select Case GetInfo("SCHD_Type")
     
     Case "PANEL"
+    
+        Dim MaxCircuits As Byte
         
-        For i = 1 To 42
+        If Range("I95").Value = "84" Then
+            MaxCircuits = 84
+            Else
+            MaxCircuits = 42
+        End If
+        
+        For i = 1 To MaxCircuits
             Call ResetLoadFormulas("CKT", 1, i)
         Next
         

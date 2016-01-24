@@ -27,7 +27,7 @@ Public Sub Schd_Calculate(Sht As Excel.Worksheet)
 End Sub
 
 Sub Schd_Change(ByVal Target As Excel.Range)
-
+        
     Dim ValidRange As Range
     Dim SchdPoles As Byte
 
@@ -38,8 +38,16 @@ Sub Schd_Change(ByVal Target As Excel.Range)
     Select Case GetInfo("SCHD_Type")
         
         Case "PANEL"
+        
+            Dim MaxCircuits As Byte
             
-            Set ValidRange = Range("B12", Cells(56, 9 + SchdPoles))
+            If Range("I95").Value = "84" Then
+                MaxCircuits = 84
+                Else
+                MaxCircuits = 42
+            End If
+            
+            Set ValidRange = Range("B12", Cells(MaxCircuits + 14, 9 + SchdPoles))
             
         Case "BUS"
         
@@ -74,7 +82,7 @@ Public Sub AutoHide()
     Dim FirstRow As Integer
     Dim LastRow As Integer
     Dim SchdPoles As Byte
-    
+     
     On Error Resume Next
 
     SchdPoles = GetPoles()
@@ -82,12 +90,20 @@ Public Sub AutoHide()
     Select Case GetInfo("SCHD_Type")
         
         Case "PANEL"
-  
+        
+            Dim MaxCircuits As Byte
+            
+            If Range("I95").Value = "84" Then
+                MaxCircuits = 84
+                Else
+                MaxCircuits = 42
+            End If
+            
             FirstCol = 3
             LastCol = 8 + SchdPoles
             
-            FirstRow = 54
-            LastRow = 65
+            FirstRow = MaxCircuits + 12
+            LastRow = FirstRow + 11
             
         Case "BUS"
            
@@ -114,6 +130,8 @@ Public Sub AutoHide()
             
         Next
             
+        'MsgBox ("ROW " & Row & " inuse? " & RowInUse)
+        
         If RowInUse And Range("A" & Row).EntireRow.Hidden = True Then
             
             Range("A" & Row).EntireRow.Hidden = False
